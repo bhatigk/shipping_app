@@ -51,6 +51,10 @@ gem "bootsnap", require: false
 gem 'devise', '~> 4.9.2'
 # For authorizations in the application
 gem 'pundit'
+# Code analysis tools
+gem 'rubocop', '~> 1.2.0'
+gem 'rails_best_practices', '~> 1.20.0'
+gem 'overcommit', '~> 0.58.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
