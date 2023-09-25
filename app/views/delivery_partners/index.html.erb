@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+
+  <h1>Delivery partners</h1>
+  <div class="row d-flex text-align-end me-4"><%= link_to "New delivery partner", new_delivery_partner_path %></div>
+
+  <div id="delivery_partners">
+    <table class="table table-borderless table-custom-border mt-4">
+      <thead class="table-custom-border">
+        <tr>
+          <th class="sticky-top">#</th>
+          <th class="sticky-top">Company Name</th>
+          <th class="sticky-top text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @delivery_partners.each_with_index do |delivery_partner, row_index| %>
+          <%= render delivery_partner, row_index: row_index + 1 %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

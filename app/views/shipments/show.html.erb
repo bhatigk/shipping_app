@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <div class="text-center">
+    <h1><%= @shipment.package.package_name %></h1>
+
+    <h4>
+      <span>Source location:</span>
+      <%= @shipment.fetch_source_location %>
+    </h4>
+
+    <h4>
+      <span>Target location:</span>
+      <%= @shipment.fetch_target_location %>
+    </h4>
+
+    <h4>
+      <span>Delivery partner:</span>
+      <%= @shipment.delivery_partner.company_name %>
+    </h4>
+
+    <div>
+      <%= link_to "Edit this shipment", edit_shipment_path(@shipment) %> |
+      <%= link_to "Back to shipments", shipments_path %>
+
+      <%= button_to "Destroy this shipment", @shipment, method: :delete, class: "mt-4 btn btn-danger" %>
+    </div>
+  </div>
+</div>

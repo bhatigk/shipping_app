@@ -1,0 +1,18 @@
+<tr id="<%= dom_id shipment %>">
+  <td><%= row_index %></td>
+  <td>
+    <%= shipment.fetch_source_location %>
+  </td>
+  <td>
+  <%= shipment.fetch_target_location %>
+  </td>
+  <td>
+    <%= shipment.status %>
+  </td>
+  <td>
+    <%= shipment.package.package_name %>
+  </td>
+  <td class="text-center">
+    <%= link_to "Show this shipment", shipment %>
+  </td>
+</tr>

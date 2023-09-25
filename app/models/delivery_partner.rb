@@ -1,0 +1,2 @@
+class DeliveryPartner < User
+end

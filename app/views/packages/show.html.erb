@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <div class="text-center">
+    <h1><%= @package.package_name %></h1>
+
+    <h4>
+      <span>Description:</span>
+      <%= @package.description %>
+    </h4>
+
+    <h4>
+      <span>weight:</span>
+      <%= @package.weight %> kg
+    </h4>
+
+    <div>
+      <%= link_to "Edit this package", edit_package_path(@package) %> |
+      <%= link_to "Back to packages", packages_path %>
+
+      <%= button_to "Destroy this package", @package, method: :delete, class: "mt-4 btn btn-danger" %>
+    </div>
+  </div>
+</div>

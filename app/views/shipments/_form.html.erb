@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <%= form_with(model: shipment) do |form| %>
+    <% if shipment.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(shipment.errors.count, "error") %> prohibited this shipment from being saved:</h2>
+
+        <ul>
+          <% shipment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h6 class="mt-4">Source Location:</h6>
+    <%=form.fields_for :source_location do |source_location_form| %>
+      <div class="row mt-2">
+        <div class="col-6">
+          <div class="form-group">
+            <label>Street address </label>
+            <%= source_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.source_location['street_address'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>City </label>
+            <%= source_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.source_location['city'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>State </label>
+            <%= source_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.source_location['state'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>Zip </label>
+            <%= source_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.source_location['zip_code'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <h6 class="mt-4">Target Location:</h6>
+    <%=form.fields_for :target_location do |target_location_form| %>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label>Street address </label>
+            <%= target_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.target_location['street_address'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>City </label>
+            <%= target_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.target_location['city'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>State </label>
+            <%= target_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.target_location['state'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>Zip </label>
+            <%= target_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.target_location['zip_code'] : ''}", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-group mt-4">
+      <%= form.label :status %>
+      <%= form.select :status, Shipment.statuses.keys.map { |status| [status.titleize, status]}, {}, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group mt-4">
+      <%= form.label :package_id %>
+      <%= form.select :package_id, Package.all.map { |package| [package.package_name.titleize, package.id]}, {}, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group mt-4">
+      <%= form.label :delivery_partner_id %>
+      <%= form.select :delivery_partner_id, DeliveryPartner.all.map { |delivery_partner| [delivery_partner.company_name, delivery_partner.id]}.uniq, { prompt: "Select Deivery partner" }, { class: "form-control" } %>
+    </div>
+
+    <%= form.hidden_field :customer_id, value: current_user.id %>
+
+    <div class="actions mt-4">
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

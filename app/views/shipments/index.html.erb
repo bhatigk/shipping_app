@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+
+  <h1>Shipment</h1>
+  <div class="row d-flex text-align-end me-4"><%= link_to "New Shipment", new_shipment_path %></div>
+
+  <div id="shipments">
+    <table class="table table-borderless table-custom-border mt-4">
+      <thead class="table-custom-border">
+        <tr>
+          <th class="sticky-top">#</th>
+          <th class="sticky-top">Source Location</th>
+          <th class="sticky-top">Target Location</th>
+          <th class="sticky-top">Status</th>
+          <th class="sticky-top">Package Name</th>
+          <th class="sticky-top text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shipments.each_with_index do |shipment, row_index| %>
+          <%= render shipment, row_index: row_index + 1 %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

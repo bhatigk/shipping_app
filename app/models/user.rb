@@ -6,13 +6,18 @@ class User < ApplicationRecord
 
   has_many :user_roles
   has_many :roles, through: :user_roles
+  has_many :shipments, dependent: :destroy
+
+  validates :company_name, presence: true, if: :delivery_partner?
 
   def add_role(role_name)
     role = Role.find_by(name: role_name)
     roles << role if role.present?
   end
 
-  def role?(role_name)
-    roles.exists?(name: role_name)
+  %w(admin customer delivery_partner).each do |klass|
+    define_method "#{klass}?" do
+      roles.exists?(name: klass)
+    end
   end
 end

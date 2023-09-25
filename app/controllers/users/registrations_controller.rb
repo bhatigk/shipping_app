@@ -5,7 +5,10 @@ module Users
     def create
       super do |resource|
         # Assign the selected role to the user during registration
-        resource.add_role(params[:user][:roles]) if params[:user][:roles].present?
+        if params[:user][:roles].present?
+          resource.add_role(params[:user][:roles])
+          resource.type = params[:user][:roles].try(&:titleize).gsub(" ", "")
+        end
       end
     end
   end

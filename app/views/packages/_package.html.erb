@@ -1,0 +1,9 @@
+<div class="col-md-3 mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= package.package_name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= package.weight %> kg</h6>
+      <%= link_to "Show package details", package_path(package), class: "card-link" %>
+    </div>
+  </div>
+</div>
