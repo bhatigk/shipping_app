@@ -5,11 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
-  has_many :user_roles
+  has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
-  has_many :shipments, dependent: :destroy
-
-  validates :company_name, presence: true, if: :delivery_partner?
+  has_many :shipments
 
   def add_role(role_name)
     role = Role.find_by(name: role_name)

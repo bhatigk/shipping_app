@@ -10,6 +10,9 @@ class Shipment < ApplicationRecord
     canceled: 3
   }
 
+  delegate :package_name, to: :package
+  delegate :company_name, to: :delivery_partner
+
   validates :source_location, presence: true
   validates :target_location, presence: true
 

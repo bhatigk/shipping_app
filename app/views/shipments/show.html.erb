@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="container">
     <div class="d-flex align-items-center justify-content-between">
-      <h1><%= @shipment.package.package_name %></h1>
+      <h1><%= @shipment.package_name %></h1>
       <% if current_user.admin? %>
         <h4>Shipped By: <%= @shipment.customer.username %></h4>
       <% end %>
@@ -35,7 +35,7 @@
             </h4>
           </td>
           <td>
-            <%= @shipment.delivery_partner.company_name %>
+            <%= @shipment.company_name %>
           </td>
         </tr>
       </tbody>
