@@ -18,25 +18,25 @@
         <div class="col-6">
           <div class="form-group">
             <label>Street address </label>
-            <%= source_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.source_location['street_address'] : ''}", class: "form-control" %>
+            <%= source_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.source_location['street_address'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>City </label>
-            <%= source_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.source_location['city'] : ''}", class: "form-control" %>
+            <%= source_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.source_location['city'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>State </label>
-            <%= source_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.source_location['state'] : ''}", class: "form-control" %>
+            <%= source_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.source_location['state'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>Zip </label>
-            <%= source_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.source_location['zip_code'] : ''}", class: "form-control" %>
+            <%= source_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.source_location['zip_code'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
       </div>
@@ -48,25 +48,25 @@
         <div class="col-6">
           <div class="form-group">
             <label>Street address </label>
-            <%= target_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.target_location['street_address'] : ''}", class: "form-control" %>
+            <%= target_location_form.text_field :street_address, value: "#{form.object.source_location.present? ? form.object.target_location['street_address'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>City </label>
-            <%= target_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.target_location['city'] : ''}", class: "form-control" %>
+            <%= target_location_form.text_field :city, value: "#{form.object.source_location.present? ? form.object.target_location['city'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>State </label>
-            <%= target_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.target_location['state'] : ''}", class: "form-control" %>
+            <%= target_location_form.text_field :state, value: "#{form.object.source_location.present? ? form.object.target_location['state'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
         <div class="col-2">
           <div class="form-group">
             <label>Zip </label>
-            <%= target_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.target_location['zip_code'] : ''}", class: "form-control" %>
+            <%= target_location_form.number_field :zip_code, value: "#{form.object.source_location.present? ? form.object.target_location['zip_code'] : ''}", class: "form-control", disabled: !current_user.admin? %>
           </div>
         </div>
       </div>
@@ -79,12 +79,12 @@
 
     <div class="form-group mt-4">
       <%= form.label :package_id %>
-      <%= form.select :package_id, Package.all.map { |package| [package.package_name.titleize, package.id]}, {}, { class: "form-control" } %>
+      <%= form.select :package_id, Package.all.map { |package| [package.package_name.titleize, package.id]}, {}, { class: "form-control", disabled: !current_user.admin? } %>
     </div>
 
     <div class="form-group mt-4">
       <%= form.label :delivery_partner_id %>
-      <%= form.select :delivery_partner_id, DeliveryPartner.all.map { |delivery_partner| [delivery_partner.company_name, delivery_partner.id]}.uniq, { prompt: "Select Deivery partner" }, { class: "form-control" } %>
+      <%= form.select :delivery_partner_id, DeliveryPartner.all.map { |delivery_partner| [delivery_partner.company_name, delivery_partner.id]}.uniq, { prompt: "Select Deivery partner" }, { class: "form-control", disabled: !current_user.admin? } %>
     </div>
 
     <%= form.hidden_field :customer_id, value: current_user.id %>

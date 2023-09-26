@@ -12,14 +12,18 @@ class ShipmentsController < ApplicationController
   # GET /shipment/new
   def new
     @shipment = Shipment.new
+    authorize @shipment
   end
 
   # GET /shipment/1/edit
-  def edit; end
+  def edit
+    authorize @shipment
+  end
 
   # POST /shipment or /shipment.json
   def create
     @shipment = Shipment.new(shipment_params)
+    authorize @shipment
 
     respond_to do |format|
       if @shipment.save
@@ -34,6 +38,8 @@ class ShipmentsController < ApplicationController
 
   # PATCH/PUT /shipment/1 or /shipment/1.json
   def update
+    authorize @shipment
+
     respond_to do |format|
       if @shipment.update(shipment_params)
         format.html { redirect_to shipment_url(@shipment), notice: "shipment was successfully updated." }
@@ -47,6 +53,8 @@ class ShipmentsController < ApplicationController
 
   # DELETE /shipment/1 or /shipment/1.json
   def destroy
+    authorize @shipment
+
     @shipment.destroy
 
     respond_to do |format|

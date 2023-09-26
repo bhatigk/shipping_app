@@ -1,28 +1,56 @@
-<p style="color: green"><%= notice %></p>
 <div class="container-fluid">
-  <div class="text-center">
-    <h1><%= @shipment.package.package_name %></h1>
-
-    <h4>
-      <span>Source location:</span>
-      <%= @shipment.fetch_source_location %>
-    </h4>
-
-    <h4>
-      <span>Target location:</span>
-      <%= @shipment.fetch_target_location %>
-    </h4>
-
-    <h4>
-      <span>Delivery partner:</span>
-      <%= @shipment.delivery_partner.company_name %>
-    </h4>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <h1><%= @shipment.package.package_name %></h1>
+      <% if current_user.admin? %>
+        <h4>Shipped By: <%= @shipment.customer.username %></h4>
+      <% end %>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <h4>
+              <span>Source location:</span>
+            </h4>
+          </td>
+          <td>
+            <%= @shipment.fetch_source_location %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>
+              <span>Target location:</span>
+            </h4>
+          </td>
+          <td>
+            <%= @shipment.fetch_target_location %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4>
+              <span>Delivery partner:</span>
+            </h4>
+          </td>
+          <td>
+            <%= @shipment.delivery_partner.company_name %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <div>
-      <%= link_to "Edit this shipment", edit_shipment_path(@shipment) %> |
+      <% if current_user.admin? or current_user.delivery_partner? %>
+        <%= link_to "Edit this shipment", edit_shipment_path(@shipment) %> |
+      <% end %>
+
       <%= link_to "Back to shipments", shipments_path %>
 
-      <%= button_to "Destroy this shipment", @shipment, method: :delete, class: "mt-4 btn btn-danger" %>
+      <% if current_user.admin? %>
+        <%= button_to "Destroy this shipment", @shipment, method: :delete, class: "mt-4 btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>

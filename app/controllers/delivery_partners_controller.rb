@@ -4,21 +4,29 @@ class DeliveryPartnersController < ApplicationController
   # GET /delivery_partners or /delivery_partners.json
   def index
     @delivery_partners = DeliveryPartner.all
+    authorize @delivery_partners
   end
 
   # GET /delivery_partners/1 or /delivery_partners/1.json
-  def show; end
+  def show
+    authorize @delivery_partner
+  end
 
   # GET /delivery_partners/new
   def new
     @delivery_partner = DeliveryPartner.new
+    authorize @delivery_partner
   end
 
   # GET /delivery_partners/1/edit
-  def edit; end
+  def edit
+    authorize @delivery_partner
+  end
 
   # POST /delivery_partners or /delivery_partners.json
   def create
+    authorize @delivery_partner
+
     @delivery_partner = DeliveryPartner.new(delivery_partner_params)
 
     respond_to do |format|
@@ -34,6 +42,8 @@ class DeliveryPartnersController < ApplicationController
 
   # PATCH/PUT /delivery_partners/1 or /delivery_partners/1.json
   def update
+    authorize @delivery_partner
+
     respond_to do |format|
       if @delivery_partner.update(delivery_partner_params)
         format.html { redirect_to delivery_partner_url(@delivery_partner), notice: "delivery_partner was successfully updated." }
@@ -47,6 +57,8 @@ class DeliveryPartnersController < ApplicationController
 
   # DELETE /delivery_partners/1 or /delivery_partners/1.json
   def destroy
+    authorize @delivery_partner
+
     @delivery_partner.destroy
 
     respond_to do |format|

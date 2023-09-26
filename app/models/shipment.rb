@@ -10,6 +10,9 @@ class Shipment < ApplicationRecord
     canceled: 3
   }
 
+  validates :source_location, presence: true
+  validates :target_location, presence: true
+
   %w(source_location target_location).each do |klass|
     define_method "fetch_#{klass}" do
       address = case klass

@@ -3,7 +3,7 @@ class PackagesController < ApplicationController
 
   # GET /packages or /packages.json
   def index
-    @packages = Package.all
+    @packages = Package.includes(:shipment).where(shipment: { id: nil }).order(created_at: :asc)
   end
 
   # GET /packages/1 or /packages/1.json
@@ -12,14 +12,18 @@ class PackagesController < ApplicationController
   # GET /packages/new
   def new
     @package = Package.new
+    authorize @package
   end
 
   # GET /packages/1/edit
-  def edit; end
+  def edit
+    authorize @package
+  end
 
   # POST /packages or /packages.json
   def create
     @package = Package.new(package_params)
+    authorize @package
 
     respond_to do |format|
       if @package.save
@@ -34,6 +38,8 @@ class PackagesController < ApplicationController
 
   # PATCH/PUT /packages/1 or /packages/1.json
   def update
+    authorize @package
+
     respond_to do |format|
       if @package.update(package_params)
         format.html { redirect_to package_url(@package), notice: "package was successfully updated." }
@@ -47,6 +53,8 @@ class PackagesController < ApplicationController
 
   # DELETE /packages/1 or /packages/1.json
   def destroy
+    authorize @package
+
     @package.destroy
 
     respond_to do |format|

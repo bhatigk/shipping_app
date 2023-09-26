@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
 <div class="container-fluid">
-
   <h1>Shipment</h1>
-  <div class="row d-flex text-align-end me-4"><%= link_to "New Shipment", new_shipment_path %></div>
+  <% if current_user.admin? or current_user.customer? %>
+    <div class="row d-flex text-align-end me-4"><%= link_to "New Shipment", new_shipment_path %></div>
+  <% end %>
 
   <div id="shipments">
     <table class="table table-borderless table-custom-border mt-4">

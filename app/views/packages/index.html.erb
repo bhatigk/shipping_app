@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
 <div class="container-fluid">
 
-  <h1>Package</h1>
+  <h1>Packages</h1>
   <div class="d-flex justify-content-end me-2">
-    <%= link_to "New Package", new_package_path, class: "btn btn-primary" %>
-    <%= link_to "Create Shipment", new_shipment_path, class: "btn btn-primary ms-4" %>
+    <% if current_user.admin? or current_user.customer? %>
+      <%= link_to "New Package", new_package_path, class: "btn btn-primary" %>
+    <% end %>
+
+    <% if current_user.admin? or current_user.customer? %>
+      <%= link_to "Create Shipment", new_shipment_path, class: "btn btn-primary ms-4" %>
+    <% end %>
   </div>
 
   <div id="package", class="row">

@@ -11,27 +11,42 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-sm bg-light">
-      <ul class="navbar-nav m-auto px-4">
-        <li class="nav-item">
-          <%= link_to 'Home', root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Delivery Partners', delivery_partners_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Shipments', shipments_path, class: "nav-link" %>
-        </li>
-      </ul>
-
-      <div class="me-4">
-        <% if !user_signed_in? %>
-          <%= link_to "Login", new_user_session_path, class: "btn" %>
-        <% else %>
+    <% if user_signed_in? %>
+      <nav class="navbar navbar-expand-sm bg-light d-flex justify-content-between">
+        <ul class="navbar-nav px-4">
+          <li class="nav-item">
+            <%= link_to 'Home', root_path, class: "nav-link" %>
+          </li>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Delivery Partners', delivery_partners_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to 'Shipments', shipments_path, class: "nav-link" %>
+          </li>
+        </ul>
+    
+        <div class="me-4">
           <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn" %>
+        </div>
+      </nav>
+    <% end %>
+
+    <div class="container-fluid mt-4">
+      <div id="messages">
+        <% flash.each do |name, message| %>
+          <% if message.is_a?(String) && !message.blank? %>
+            <div class="alert alert-<%= name.to_s == "notice" ? "success" : "danger" %>">
+              <div id="flash_<%= name %>">
+                <%= message.html_safe %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
-    </nav>
+    </div>
+
     <%= yield %>
   </body>
 </html>
