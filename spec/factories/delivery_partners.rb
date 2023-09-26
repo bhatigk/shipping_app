@@ -3,7 +3,7 @@ FactoryBot.define do
     username { Faker::Name.name }
     email    { Faker::Internet.email }
     password { "password" }
-    type { "delivery_partner" }
+    type { "DeliveryPartner" }
     phone_number { Faker::PhoneNumber.cell_phone }
 
     transient do

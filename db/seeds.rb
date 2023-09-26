@@ -12,11 +12,11 @@ user = User.new(username: "Admin", email: "admin@gmail.com", password: 'abc123',
 user.add_role('admin')
 user.save
 
-user = User.new(username: "Delivery Partner", email: "delivery_partner@gmail.com", password: 'abc123', password_confirmation: 'abc123', type: "DeliveryPartner")
+user = DeliveryPartner.new(username: "Delivery Partner", email: "delivery_partner@gmail.com", password: 'abc123', password_confirmation: 'abc123', company_name: "Delivery partner1")
 user.add_role('delivery_partner')
 user.save
 
-user = User.new(username: "Customer", email: "customer@gmail.com", password: 'abc123', password_confirmation: 'abc123', type: "Customer")
+user = Customer.new(username: "Customer", email: "customer@gmail.com", password: 'abc123', password_confirmation: 'abc123')
 user.add_role('customer')
 user.save
 
